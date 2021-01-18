@@ -1,1 +1,1 @@
-web: origin="https://livevote-front.herokuapp.com" node server/index.js
+web: serve -s build
