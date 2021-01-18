@@ -28,7 +28,7 @@ const Graph = () => {
     
     return (
         
-        <div style={{width: '100%'}}>
+        <div style={{width: '100%', display: 'flex', justifyContent: 'center'}}>
             {/* {
                 data && Object.keys(data).map((val) => (
                     <div>{val} : {data[val].length}</div>
