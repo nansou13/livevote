@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Graph from '../../Components/graph'
 import {startGame, sendMessage} from '../../socket'
 
 
@@ -28,6 +29,9 @@ const Game = () => {
     return (
         <div style={{width: '100%'}}>
             {theme && (<div>{theme}</div>)}
+            {selected && (
+                <Graph />
+            )}
             <div style={{width: 600, margin: 'auto'}} >
                 {
                     values && values.map(val => (
