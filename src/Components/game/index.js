@@ -4,7 +4,7 @@ import {startGame, sendMessage} from '../../socket'
 
 
 
-const Game = () => {
+const Game = ({username}) => {
     const [theme, setTheme] = useState(false)
     const [values, setValues] = useState([])
     const [selected, setSelected] = useState(false)
@@ -28,11 +28,12 @@ const Game = () => {
     
     return (
         <div style={{width: '100%'}}>
-            {theme && (<div>{theme}</div>)}
-            {selected && (
+            {theme && (<div style={{fontWeight: 'bold',
+    fontSize: '30px'}}>{theme}</div>)}
+            {(selected || username === 'nans') && (
                 <Graph />
             )}
-            <div style={{width: 600, margin: 'auto'}} >
+            <div style={{width: '80%', margin: 'auto'}} >
                 {
                     values && values.map(val => (
                         <div 

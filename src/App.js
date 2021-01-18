@@ -29,8 +29,7 @@ const App = () => {
       {name === 'nans' && (<div><Admin /></div>)}
       <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'center'}}>
         
-        <div style={{display: 'flex', flexDirection: 'column'}}>
-          
+        <div style={{display: 'flex', flexDirection: 'column', width:'80%', justifyContent: 'center'}}>
           <Game username={name} />
         </div>
         
