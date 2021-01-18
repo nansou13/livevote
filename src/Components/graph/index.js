@@ -37,7 +37,7 @@ const Graph = () => {
             } */}
             {
                 data && (
-            <BarChart width={400} height={300} data={Object.keys(data).map((val) => ({name : val, data: data[val].length}))}>
+            <BarChart width={320} height={300} data={Object.keys(data).map((val) => ({name : val, data: data[val].length}))}>
                 <XAxis dataKey="name" stroke="#8884d8" />
                 <YAxis/>
                 <Bar dataKey="data" fill="#8884d8" />
