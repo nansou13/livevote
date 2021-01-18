@@ -33,6 +33,9 @@ io.on('connection', (socket) => {
         socket.join(ROOM);
         io.emit('userList', {players});
         io.emit('message', {message : {text : name+' vient de rejoindre la partie'}});
+        if(theme && values){
+          io.emit('RunVote', {theme, values});
+        }
     })
 
     socket.on('addNewGame', (newvalues) => {
