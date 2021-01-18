@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {updateMessageList, sendMessage} from '../../socket'
+import {updateUserList, sendMessage} from '../../socket'
 
 
 
@@ -10,6 +10,7 @@ const Admin = () => {
 
     const [theme, setTheme] = useState('...')
     const [values, setValues] = useState([])
+    const [users, setUsers] = useState([])
     const [currentValue, setCurrentValue] = useState('')
    
     const addNewValue = (value) => {
@@ -28,9 +29,18 @@ const Admin = () => {
           setValues([])
       }
 
+      const updateUser = (players) => {
+        setUsers(players)
+      }
+
+      useEffect(() => {
+        updateUserList(updateUser)
+    }, []); // N’exécute l’effet que si count a changé
+    
+
     return (
         <div style={{width: '100%'}}>
-            <div>admin</div>
+            <div>admin ({users.length})</div>
             <div>
                 Theme : 
                 <input value={theme} type="text" onChange={handleTheme} />
