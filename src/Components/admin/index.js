@@ -4,10 +4,6 @@ import {updateUserList, sendMessage} from '../../socket'
 
 
 const Admin = () => {
-    // let messageListing = []
-    const [messageListing, setMessage] = useState([]);
-    const [messagesend, setmessagesend] = useState('')
-
     const [theme, setTheme] = useState('...')
     const [values, setValues] = useState([])
     const [users, setUsers] = useState([])

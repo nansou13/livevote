@@ -1,6 +1,6 @@
 import io from 'socket.io-client';
 
-const socketserver = process.env.REACT_APP_SOCKETSERVER || "http://localhost:4000";
+const socketserver = process.env.REACT_APP_SOCKETSERVER || "http://localhost:4000";//"http://192.168.1.66:4000";
 export const socket = io(socketserver);
 const currentUsersArray = []
 export function sendMessage(id, value) {
@@ -34,6 +34,11 @@ export function startGame(callBack) {
   socket.on('RunVote', ({theme, values}) => {
     console.log('Run vote!!!',theme, values)
   callBack({theme, values})
+})
+}
+export function getTheme(callBack) {
+  socket.on('getTheme', ({theme, values, results}) => {
+  callBack({theme, values, results})
 })
 }
 export function refreshStat(callBack) {

@@ -1,4 +1,10 @@
 import {useState} from 'react';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 import logo from './logo.svg';
 import './App.css';
 import { addPlayer } from './socket'
@@ -22,27 +28,25 @@ const App = () => {
     }
   }
 
-  return connected ? (
-
-    <div className="App">
-      Bonjour {name} ! 
-      {name === 'nans' && (<div><Admin /></div>)}
-      <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'center'}}>
-        
-        <div style={{display: 'flex', flexDirection: 'column', width:'80%', justifyContent: 'center'}}>
-          <Game username={name} />
-        </div>
-        
-        {/* <UserList username={name} /> */}
-
+  return (
+    <Router>
+      <div className="App">
+        <div className="blockPrinc">
+        <Switch>
+          <Route exact path="/">
+              <Game />
+          </Route>
+          <Route path="/admin">
+            <>
+            <Admin />
+            <Game isAdmin/>
+            </>
+          </Route>
+        </Switch>
+          </div>
       </div>
-    </div>
-  ) : (
-    <div>
-      <input type="text" onChange={handleName} onKeyDown={({key}) => key === 'Enter' && clickConnected()}/>
-      <button onClick={clickConnected}>Valider</button>
-    </div>
-  );
+    </Router>
+  )
 }
 
 export default App;

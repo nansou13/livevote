@@ -1,18 +1,29 @@
 import React, { useEffect, useState } from 'react';
 import Graph from '../../Components/graph'
-import {startGame, sendMessage} from '../../socket'
+import {startGame, getTheme, refreshStat, sendMessage} from '../../socket'
 
 
 
-const Game = ({username}) => {
+const Game = ({isAdmin}) => {
     const [theme, setTheme] = useState(false)
     const [values, setValues] = useState([])
     const [selected, setSelected] = useState(false)
+    const [data, setData] = useState([])
 
     const updateGame = ({theme, values})=> {
+        console.log('startGame')
         setTheme(theme)
         setValues(values)
         setSelected(false)
+        setData([])
+    }
+    const getGame = ({theme, values, results})=> {
+        console.log('getGame')
+        setTheme(theme)
+        setValues(values)
+        if(isAdmin){
+            setData(formatResult(results))
+        }
     }
 
     const voted = (vote) => {
@@ -22,28 +33,47 @@ const Game = ({username}) => {
         }
         
     }
+
+    const formatResult = (results) => (
+        results.reduce((acc, current) => {
+            return {
+                ...acc, 
+                [current.choice]: [
+                    ...(acc[current.choice] || []),
+                    current.id,
+                  ],
+                }
+            }, {})
+    )
+
+
+    const refreshGame = (results) => {
+        const formatdata = formatResult(results)
+        console.log('formatData...',results, formatdata)
+        setData(formatdata)
+    }
+
     useEffect(() => {
-        startGame(updateGame)
+        startGame(updateGame) //Nouveau vote
+        getTheme(getGame) //New connexion
+        refreshStat(refreshGame) //New vote Externe
     }, []); // N’exécute l’effet que si count a changé
     
+    console.log('result.....', data)
+
     return (
-        <div style={{width: '100%'}}>
-            {theme && (<div style={{fontWeight: 'bold',
-    fontSize: '30px'}}>{theme}</div>)}
-            {(selected || username === 'nans') && (
-                <Graph />
+        <>
+            {theme && (<h1>{theme}</h1>)}
+            {(selected || isAdmin) && (
+                <Graph data={data} />
             )}
-            <div style={{width: '80%', margin: 'auto'}} >
+            <div>
                 {
                     values && values.map(val => (
                         <div 
                         key={val}
+                        className="voteSelection"
                         style={{
-                            width: '100%', 
-                            border: '1px solid black',
-                            padding: 15,
-                            cursor: 'pointer',
-                            margin: 10,
                             background: selected && selected !== val ? '#EEE' : '#FFF'
                         }}
                         onClick={() => voted(val)}
@@ -51,8 +81,9 @@ const Game = ({username}) => {
                     ))
                 }
             </div>
-            
-        </div>
+        </>
+        
+
     )
 }
 
