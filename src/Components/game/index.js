@@ -53,7 +53,7 @@ const Game = ({ isAdmin }) => {
   return (
     <div className="blockGame">
       {currentTheme && <h1>{currentTheme}</h1>}
-      {isAdmin && oldValues.length > 0 && (<div onClick={() => setDisplayed(true)}>Anciens resultats</div>)}
+      {isAdmin && oldValues?.length > 0 && (<div onClick={() => setDisplayed(true)}>Anciens resultats</div>)}
       {(selected || isAdmin) && <Graph data={data} />}
       <div>
         {currentValues &&
