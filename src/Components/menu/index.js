@@ -13,7 +13,7 @@ const Menu = () => {
         displayed && (
           <div className="overlay" onClick={()=>setDisplayed(false)}>
             <div className="qrcode">
-              <QRCode size={250} value={window.location.href} />
+              <QRCode size={250} value={window.location.href.replace('/admin', '')} />
             </div>
           </div>
         )

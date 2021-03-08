@@ -4,6 +4,7 @@ import './App.css';
 import Game from './Components/game';
 import Admin from './Components/admin';
 import Menu from './Components/menu';
+import Create from './Components/create';
 
 const App = () => (
   <Router>
@@ -14,27 +15,44 @@ const App = () => (
           <Route exact path="/">
             <Game />
           </Route>
-          <Route path="/admin">
-            <>
+          {/* <Route
+            exact
+            path="/"
+            render={() => {
+                return (
+                  <Redirect to="/demo" /> 
+                )
+            }}
+          /> */}
+          <Route exact path="/admin">
+            <div className="adminContent">
               <Admin />
               <Game isAdmin />
-            </>
+            </div>
           </Route>
           {/* <Route path="/display">
             <>
               <Game isAdmin />
             </>
-          </Route>
+          </Route>*/}
           <Route path="/create">
             <>
-              <Game isAdmin />
+              <Create />
             </>
           </Route>
-          <Route path="/:id">
+          
+          <Route path="/:id/admin">
             <>
+              <Admin />
               <Game isAdmin />
             </>
-          </Route> */}
+          </Route> 
+          <Route path="/:id">
+            <>
+              <Game />
+            </>
+          </Route> 
+          
         </Switch>
       </div>
     </div>
