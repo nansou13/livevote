@@ -80,7 +80,7 @@ const Game = ({ isAdmin }) => {
                 <div className="oldContent">
                   <div>{oldResult.theme}</div>
                   <div className="oldResults">
-                    {displayResultData(oldResult.results).map(({ name, currentOld }) => (
+                    {displayResultData(oldResult.results).map(({ name, data : currentOld }) => (
                       <div>
                         {name} : {currentOld}
                       </div>
