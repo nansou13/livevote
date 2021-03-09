@@ -1,11 +1,11 @@
 import io from 'socket.io-client';
 
 const socketserver = process.env.REACT_APP_SOCKETSERVER || 'http://localhost:4000'; // "http://192.168.1.66:4000";
-const currentRoom = window.location.pathname.split('/')[1]
+const currentRoom = window.location.pathname.split('/')[1];
 export const socket = io(socketserver, {
   query: {
-    room: (currentRoom !== 'admin' && currentRoom !== 'create') ? currentRoom : 'livevote'
-  }
+    room: currentRoom !== 'admin' && currentRoom !== 'create' ? currentRoom : 'livevote',
+  },
 });
 export function sendMessage(id, value) {
   socket.emit(id, value);

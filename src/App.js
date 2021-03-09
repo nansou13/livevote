@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import './App.css';
-import Game from './Components/game';
-import Admin from './Components/admin';
-import Menu from './Components/menu';
-import Create from './Components/create';
+import Game from 'Components/game';
+import Admin from 'Components/admin';
+import Menu from 'Components/menu';
+import Create from 'Components/create';
+import 'App.css';
 
 const App = () => (
   <Router>
     <div className="App">
-      <Menu/>
+      <Menu />
       <div className="blockPrinc">
         <Switch>
           <Route exact path="/">
@@ -34,25 +34,24 @@ const App = () => (
             <>
               <Game isAdmin />
             </>
-          </Route>*/}
+          </Route> */}
           <Route path="/create">
             <>
               <Create />
             </>
           </Route>
-          
+
           <Route path="/:id/admin">
             <>
               <Admin />
               <Game isAdmin />
             </>
-          </Route> 
+          </Route>
           <Route path="/:id">
             <>
               <Game />
             </>
-          </Route> 
-          
+          </Route>
         </Switch>
       </div>
     </div>

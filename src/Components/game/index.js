@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
-import { formatResultData, displayResultData } from '../../Functions'
-import Graph from '../../Components/graph';
-import { startGame, getTheme, refreshStat, sendMessage } from '../../socket';
+import { formatResultData, displayResultData } from 'Functions';
+import Graph from 'Components/graph';
+import { startGame, getTheme, refreshStat, sendMessage } from 'socket';
 
 const Game = ({ isAdmin }) => {
   const [currentTheme, setCurrentTheme] = useState(false);
@@ -10,14 +10,14 @@ const Game = ({ isAdmin }) => {
   const [oldValues, setOldValue] = useState([]);
   const [selected, setSelected] = useState(false);
   const [data, setData] = useState({});
-  const [displayed, setDisplayed] = useState(false)
+  const [displayed, setDisplayed] = useState(false);
 
   const updateGame = ({ theme, values, old }) => {
     setCurrentTheme(theme);
     setCurrentValues(values);
     setSelected(false);
     setData({});
-    setOldValue(old)
+    setOldValue(old);
   };
 
   const getGame = useCallback(
@@ -26,7 +26,7 @@ const Game = ({ isAdmin }) => {
       setCurrentValues(values);
       if (isAdmin) {
         setData(formatResultData(results));
-        setOldValue(old)
+        setOldValue(old);
       }
     },
     [isAdmin]
@@ -49,11 +49,13 @@ const Game = ({ isAdmin }) => {
     getTheme(getGame); // New connexion
     refreshStat(refreshGame); // New vote Externe
   }, [getGame, refreshGame]); // N’exécute l’effet que si count a changé
-// console.log('old', oldValues, oldValues[0].results && Object.keys(oldValues[0].results).map((val) => ({ name: val, data: oldValues[0].results[val].length })))
+  // console.log('old', oldValues, oldValues[0].results && Object.keys(oldValues[0].results).map((val) => ({ name: val, data: oldValues[0].results[val].length })))
   return (
     <div className="blockGame">
       {currentTheme && <h1>{currentTheme}</h1>}
-      {isAdmin && oldValues?.length > 0 && (<div onClick={() => setDisplayed(true)}>Anciens resultats</div>)}
+      {isAdmin && oldValues?.length > 0 && (
+        <div onClick={() => setDisplayed(true)}>Anciens resultats</div>
+      )}
       {(selected || isAdmin) && <Graph data={data} />}
       <div>
         {currentValues &&
@@ -70,28 +72,25 @@ const Game = ({ isAdmin }) => {
             </div>
           ))}
       </div>
-      {
-        displayed && (
-          <div className="overlay" onClick={()=>setDisplayed(false)}>
-            <div className="displayOlds">
-              {
-                oldValues && oldValues.map(oldResult => (
-                  <div className="oldContent">
-                    <div>{oldResult.theme}</div>
-                    <div className="oldResults">
-                      {displayResultData(oldResult.results).map(({name, data}) => (
-                        <div>
-                          {name} : {data}
-                        </div>
-                      ))}
-                    </div>
+      {displayed && (
+        <div className="overlay" onClick={() => setDisplayed(false)}>
+          <div className="displayOlds">
+            {oldValues &&
+              oldValues.map((oldResult) => (
+                <div className="oldContent">
+                  <div>{oldResult.theme}</div>
+                  <div className="oldResults">
+                    {displayResultData(oldResult.results).map(({ name, currentOld }) => (
+                      <div>
+                        {name} : {currentOld}
+                      </div>
+                    ))}
                   </div>
-                ))
-              }
-            </div>
+                </div>
+              ))}
           </div>
-        )
-      }
+        </div>
+      )}
     </div>
   );
 };

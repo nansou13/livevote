@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { updateUserList, sendMessage } from '../../socket';
+import { updateUserList, sendMessage } from 'socket';
 
 const Admin = () => {
   const [theme, setTheme] = useState('');
@@ -8,7 +8,7 @@ const Admin = () => {
   const [currentValue, setCurrentValue] = useState('');
 
   const addNewValue = (value) => {
-    if(value){
+    if (value) {
       setValues([...values, value]);
       setCurrentValue('');
     }
@@ -33,11 +33,16 @@ const Admin = () => {
   }, []); // N’exécute l’effet que si count a changé
 
   return (
-    <div className="adminForm" style={{ width: '400px' }}>
+    <div className="adminForm" style={{ minWidth: '320px', width: '100%' }}>
       <h2>admin</h2>
       <div>Utilisateurs connectés : {users.length}</div>
       <div>
-        <input placeholder="Ajouter une question" value={theme} type="text" onChange={handleTheme} />
+        <input
+          placeholder="Ajouter une question"
+          value={theme}
+          type="text"
+          onChange={handleTheme}
+        />
       </div>
       {values.map((val) => (
         <div>{val}</div>
@@ -53,7 +58,9 @@ const Admin = () => {
       </div>
 
       <div>
-        <button className="adminButton" onClick={clickSendMessage}>Valider</button>
+        <button className="adminButton" onClick={clickSendMessage}>
+          Valider
+        </button>
       </div>
     </div>
   );

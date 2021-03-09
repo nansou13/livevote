@@ -56,9 +56,12 @@ io.on('connection', (socket) => {
 
   socket.on('addNewGame', (newvalues) => {
     let currentRoom = false
+    console.log('addNew...', newvalues)
     if(newvalues.room){
       currentRoom = newvalues.room;
+      console.log('on a une room', newvalues.room)
       if(!RoomData[currentRoom]){
+        console.log('pas de room data jc pas koi')
         RoomData = {...RoomData, [currentRoom] : {
           theme : 'No question...',
           values : [],
@@ -69,6 +72,7 @@ io.on('connection', (socket) => {
       }
     }else{
       currentRoom = getRoom(socket)
+      console.log('get current room', currentRoom)
     }
     if(RoomData[currentRoom].values.length > 0){
       RoomData[currentRoom].old = [...RoomData[currentRoom].old, {
@@ -83,7 +87,7 @@ io.on('connection', (socket) => {
 
     const {theme, values, old} = RoomData[currentRoom]
 
-    console.log('runVote', RoomData);
+    console.log('runVote', RoomData, { theme, values, old });
     io.to(currentRoom).emit('RunVote', { theme, values, old });
   });
 
