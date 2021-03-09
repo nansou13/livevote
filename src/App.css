@@ -59,16 +59,20 @@ html {
 
 .overlay {
   background-color: rgba(0,0,0,.45);
-  position: absolute;
+  position: fixed;
   width: 100%;
-  height: 100%;
+  min-height: 100%;
   top: 0;
   left: 0;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.qrcode {
   display: flex;
   justify-content: center;
   align-items: center;
-  cursor: pointer;
-  z-index: 1;
+  height: 100vh;
 }
 
 .adminForm input[type="text"]
@@ -124,13 +128,26 @@ html {
 
 .displayOlds {
   min-width: 340px;
-  background: white;
-  height: 80%;
+  width: 50%;
+  margin: auto;
+  background: #fff;
+  height: auto;
+  max-height: 80vh;
   padding: 20px;
+  margin-top: 40px;
+  border-radius: 8px;
+  overflow-y: scroll;
 }
+
 .oldContent {
   margin: 10px;
   padding-bottom: 10px;
   border-bottom: 1px solid #CCC;
   text-align: left;
+}
+
+
+.oldContent > div:first-child {
+  font-weight: bold;
+  margin-bottom: 5px;
 }
