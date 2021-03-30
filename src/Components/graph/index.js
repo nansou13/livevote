@@ -1,17 +1,14 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import PropTypes from 'prop-types';
-import { BarChart, Bar, XAxis, YAxis } from 'recharts';
+import GraphDisplay from 'Components/graphDisplay'
 
 const Graph = ({ data }) => {
   const formattedData = Object.keys(data).map((val) => ({ name: val, data: data[val].length }));
+  const ref = useRef(null);
   return (
-    <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+    <div ref={ref} style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
       {data && (
-        <BarChart width={320} height={300} data={formattedData}>
-          <XAxis dataKey="name" stroke="#8884d8" />
-          <YAxis />
-          <Bar dataKey="data" fill="#8884d8" />
-        </BarChart>
+        <GraphDisplay data={formattedData} />
       )}
     </div>
   );
