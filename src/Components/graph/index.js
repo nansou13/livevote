@@ -6,6 +6,7 @@ const getMax = (data) => data && data.length>0 ? Math.max.apply(Math, data.map(f
 
 const Graph = ({ data }) => {
   const formattedData = Object.keys(data).map((val) => ({ name: val, data: data[val].length }));
+  const totalVote = formattedData.reduce((acc, value) => acc + value.data, 0)
   const ref = useRef(null);
 
   const max = getMax(formattedData)
@@ -26,7 +27,7 @@ const Graph = ({ data }) => {
             </div>
           )})
         }
-        <div>nombre de vote : {max}</div>
+        <div>nombre de vote : {totalVote}</div>
       </div>
       )}
     </div>
