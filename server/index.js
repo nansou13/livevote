@@ -77,13 +77,17 @@ io.on('connection', (socket) => {
         results: RoomData[currentRoom].results
       }]
     }
-    RoomData[currentRoom].theme = newvalues.theme;
-    RoomData[currentRoom].values = newvalues.values;
+    if(newvalues.theme){
+      RoomData[currentRoom].theme = newvalues.theme;
+      if(newvalues.values){
+        RoomData[currentRoom].values = newvalues.values;
+      }
+    }
+       
     RoomData[currentRoom].results = [];
 
     const {theme, values, old} = RoomData[currentRoom]
 
-    console.log('runVote', RoomData);
     io.to(currentRoom).emit('RunVote', { theme, values, old });
   });
 
