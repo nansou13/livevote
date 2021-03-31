@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { updateUserList, sendMessage } from 'socket';
+import './style.css';
 
 const Admin = () => {
   const [theme, setTheme] = useState('');
@@ -33,7 +34,7 @@ const Admin = () => {
   }, []); // N’exécute l’effet que si count a changé
 
   return (
-    <div className="adminForm" style={{ minWidth: '320px', width: '100%' }}>
+    <div className="adminForm">
       <h2>admin</h2>
       <div>Utilisateurs connectés : {users.length}</div>
       <div>

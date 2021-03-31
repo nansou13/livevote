@@ -1,0 +1,40 @@
+.container{
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+}
+
+.voteSelection{
+    border: 1px solid #D3D3D3;
+      padding: 15px;
+      cursor: pointer;
+      margin: 10px;
+      border-radius: 8px;
+      box-shadow: 0 3px 5px 1px rgba(0,0,0,0.3);
+}
+
+.displayOlds {
+    min-width: 340px;
+    width: 50%;
+    margin: auto;
+    background: #fff;
+    height: auto;
+    max-height: 80vh;
+    padding: 20px;
+    margin-top: 40px;
+    border-radius: 8px;
+    overflow-y: scroll;
+}
+
+.oldContent {
+    margin: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #CCC;
+    text-align: left;
+}
+
+
+.oldContent > div:first-child {
+    font-weight: bold;
+    margin-bottom: 5px;
+}

@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 import { formatResultData, displayResultData } from 'Functions';
 import Graph from 'Components/graph';
 import { startGame, getTheme, refreshStat, sendMessage } from 'socket';
+import './style.css';
 
-const Game = ({ isAdmin }) => {
+const Board = ({ isAdmin }) => {
   const [currentTheme, setCurrentTheme] = useState(false);
   const [currentValues, setCurrentValues] = useState([]);
   const [oldValues, setOldValue] = useState([]);
@@ -51,7 +52,7 @@ const Game = ({ isAdmin }) => {
   }, [getGame, refreshGame]); // N’exécute l’effet que si count a changé
   // console.log('old', oldValues, oldValues[0].results && Object.keys(oldValues[0].results).map((val) => ({ name: val, data: oldValues[0].results[val].length })))
   return (
-    <div className="blockGame">
+    <div className="container">
       {isAdmin && oldValues?.length > 0 && (
         <div onClick={() => setDisplayed(true)}>Anciens resultats</div>
       )}
@@ -95,12 +96,12 @@ const Game = ({ isAdmin }) => {
   );
 };
 
-Game.propTypes = {
+Board.propTypes = {
   isAdmin: PropTypes.bool,
 };
 
-Game.defaultProps = {
+Board.defaultProps = {
   isAdmin: false,
 };
 
-export default Game;
+export default Board;

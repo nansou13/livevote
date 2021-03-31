@@ -1,5 +1,6 @@
 import React, {useRef} from 'react';
 import PropTypes from 'prop-types';
+import './style.css';
 
 
 const getMax = (data) => data && data.length>0 ? Math.max.apply(Math, data.map(function(o) { return o.data; })) : 0
@@ -14,11 +15,8 @@ const Graph = ({ data }) => {
     return current * 100 / max
   }
   return (
-    <div ref={ref} style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
-      {formattedData && (
-        <div style={{ width: '100%', display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
-        {
-          formattedData && formattedData.map(({name, data:value}) => {
+    <div ref={ref} className="mainGraph">
+      {formattedData && formattedData.map(({name, data:value}) => {
             const cssWidth = cssCalc(value)
             return(
             <div className="mainBar">
@@ -28,8 +26,6 @@ const Graph = ({ data }) => {
           )})
         }
         <div>nombre de vote : {totalVote}</div>
-      </div>
-      )}
     </div>
   );
 };

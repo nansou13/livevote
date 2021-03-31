@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Game from 'Components/game';
+import Board from 'Components/board';
 import Admin from 'Components/admin';
 import Menu from 'Components/menu';
 import Create from 'Components/create';
@@ -10,46 +10,31 @@ const App = () => (
   <Router>
     <div className="App">
       <Menu />
-      <div className="blockPrinc">
+      <div className="main">
         <Switch>
           <Route exact path="/">
-            <Game />
+            <Board />
           </Route>
-          {/* <Route
-            exact
-            path="/"
-            render={() => {
-                return (
-                  <Redirect to="/demo" /> 
-                )
-            }}
-          /> */}
           <Route exact path="/admin">
             <div className="adminContent">
               <Admin />
-              <Game isAdmin />
+              <Board isAdmin />
             </div>
           </Route>
-          {/* <Route path="/display">
-            <>
-              <Game isAdmin />
-            </>
-          </Route> */}
           <Route path="/create">
             <>
               <Create />
             </>
           </Route>
-
           <Route path="/:id/admin">
             <>
               <Admin />
-              <Game isAdmin />
+              <Board isAdmin />
             </>
           </Route>
           <Route path="/:id">
             <>
-              <Game />
+              <Board />
             </>
           </Route>
         </Switch>

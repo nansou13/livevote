@@ -1,0 +1,22 @@
+.menu {
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
+.menu img {
+    width: 50px;
+    display: block;
+    margin: auto;
+    background: #FFF;
+    border-radius: 0 0 8px 8px;
+    box-shadow: 0px 0px 6px 0px #999;
+    cursor: pointer;
+}
+
+.qrcode {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}

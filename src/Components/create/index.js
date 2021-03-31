@@ -27,8 +27,7 @@ const Create = () => {
   redirect = `/${room}`;
 
   setTimeout(() => { window.location.replace(window.location.origin + redirect) }, 1500);
-  // similar behavior as an HTTP redirect``
-  // window.location.replace(window.location.origin + redirect);
+  
   return (
       <div>en cours...</div>
   );

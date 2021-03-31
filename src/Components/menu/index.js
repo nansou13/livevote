@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import QRCode from 'qrcode.react';
 import logo from './qrcode.png';
+import './style.css';
 
 const Menu = () => {
   const [displayed, setDisplayed] = useState(false);
