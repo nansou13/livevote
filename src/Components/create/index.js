@@ -12,19 +12,19 @@ const makeid = (length) => {
   return result;
 };
 
-// Exemple : /create?theme=qui%20a%20vol%C3%A9%20l%27orange%20du%20marchant&values=c%27est%20pas%20moi|la%20r%C3%A9ponse%20D|je%20m%27en%20ficheuh
+// Exemple : /create?theme=Tu%20pr%C3%A9f%C3%A8res%20%3F&values=Porter%20des%20chaussettes%20mouill%C3%A9%20toute%20l%E2%80%99ann%C3%A9e%20OU%20ne%20pas%20te%20laver%20tes%20cheveux%20toute%20l%E2%80%99ann%C3%A9e%20%3F%7CL%C3%A9cher%20la%20barre%20pour%20se%20tenir%20dans%20le%20m%C3%A9tro%20OU%20m%C3%A2cher%20un%20chewing-gum%20trouv%C3%A9%20par%20terre%20%3F%7CAvoir%20tes%20parents%20de%20surprendre%20en%20train%20de%20faire%20l%E2%80%99amour%20OU%20surprendre%20tes%20parents%20faire%20l%E2%80%99amour%20%3F%7C%C3%8Atre%20l%E2%80%99homme%20le%20plus%20dr%C3%B4le%20du%20monde%20OU%20%C3%AAtre%20l%E2%80%99homme%20le%20plus%20intelligent%20du%20monde%20%3F
 
 const Create = () => {
   let redirect = '/';
   const params = new URLSearchParams(useLocation().search);
-  if (params.get('theme') && params.get('values')) {
-    const theme = params.get('theme');
-    const values = params.get('values').split('|');
-    const room = `${makeid(3)}-${makeid(3)}-${makeid(3)}`;
-console.log('yes debug ==>', theme, values, room)
-    sendMessage('addNewGame', { theme, values, room });
-    redirect = `/${room}`;
-  }
+  const room = `${makeid(3)}-${makeid(3)}-${makeid(3)}`;
+
+  const theme = params.get('theme') || false;
+  const values = params.get('values') ? params.get('values').split('|') : false;
+
+  sendMessage('addNewGame', { theme, values, room });
+
+  redirect = `/${room}`;
 
   setTimeout(() => { window.location.replace(window.location.origin + redirect) }, 1500);
   // similar behavior as an HTTP redirect``

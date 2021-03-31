@@ -52,10 +52,10 @@ const Game = ({ isAdmin }) => {
   // console.log('old', oldValues, oldValues[0].results && Object.keys(oldValues[0].results).map((val) => ({ name: val, data: oldValues[0].results[val].length })))
   return (
     <div className="blockGame">
-      {currentTheme && <h1>{currentTheme}</h1>}
       {isAdmin && oldValues?.length > 0 && (
         <div onClick={() => setDisplayed(true)}>Anciens resultats</div>
       )}
+      {currentTheme && <h1>{currentTheme}</h1>}
       {(selected || isAdmin) && <Graph data={data} />}
       <div>
         {currentValues &&
